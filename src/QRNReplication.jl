@@ -20,6 +20,8 @@ include("Anomalies/AnomalyChecks.jl")
 include("LatticeFermions/FluxDiagnostics.jl")
 include("LatticeFermions/BWNormalization.jl")
 include("Generators/AdversarialCases.jl")
+include("Scoring/SelectiveScoring.jl")
+include("Reproducibility/ExperimentIO.jl")
 
 using .CoreTypes
 using .FermionFock
@@ -34,6 +36,8 @@ using .AnomalyChecks
 using .FluxDiagnostics
 using .BWNormalization
 using .AdversarialCases
+using .SelectiveScoring
+using .ExperimentIO
 
 export CoreTypes,
        FermionFock,
@@ -47,6 +51,8 @@ export CoreTypes,
        AnomalyChecks,
        FluxDiagnostics,
        BWNormalization,
-       AdversarialCases
+       AdversarialCases,
+       SelectiveScoring,
+       ExperimentIO
 
 end

@@ -1,0 +1,13 @@
+experiment_id = "phase5-validation-v1"
+schema = "phase4-v1"
+count_per_family = 10
+one_use = true
+seed_contract = "SHA256(QRNReplication || split || schema || family || cell_id)"
+status_precedence = ["OutOfDomain", "InsufficientObservation", "EquivalenceClassOnly", "Abstain", "Answer"]
+numeric_tolerance_default = 2.0e-10
+numeric_tolerance_weak_signal = 2.0e-12
+
+[targets]
+selective_risk = 0.0
+minimum_answerable_recall = 0.9
+impossibility_recall = 1.0
