@@ -8,6 +8,11 @@ export SimplicialComplex,
        vietoris_rips_complex,
        filled_simplex_complex,
        simplex_boundary_complex,
+       complex_from_facets,
+       triangulated_grid_surface,
+       connected_sum_surfaces,
+       triangulated_three_torus,
+       codimension_one_status,
        boundary_matrix_f2,
        rank_f2,
        chain_condition_holds,
@@ -46,6 +51,29 @@ struct SimplicialComplex
     end
 end
 
+"""Construct the face closure of a finite list of maximal simplices."""
+function complex_from_facets(raw_facets::AbstractVector)
+    isempty(raw_facets) && throw(ArgumentError("at least one facet is required"))
+    facets = Tuple[]
+    for raw_facet in raw_facets
+        facet = Tuple(sort!(unique!(collect(Int, raw_facet))))
+        isempty(facet) && throw(ArgumentError("facets must contain vertices"))
+        length(facet) == length(raw_facet) ||
+            throw(ArgumentError("a facet contains a repeated vertex"))
+        push!(facets, facet)
+    end
+    maximum_size = maximum(length, facets)
+    levels = [Set{Tuple}() for _ in 1:maximum_size]
+    for facet in facets
+        for face_size in 1:length(facet)
+            for positions in _combinations(length(facet), face_size)
+                push!(levels[face_size], Tuple(facet[position] for position in positions))
+            end
+        end
+    end
+    return SimplicialComplex([collect(level) for level in levels])
+end
+
 """The filled simplex of the requested topological dimension (a ball)."""
 function filled_simplex_complex(dimension::Int)
     dimension >= 0 || throw(ArgumentError("dimension must be nonnegative"))
@@ -66,6 +94,104 @@ function simplex_boundary_complex(simplex_dimension::Int)
         levels[face_dimension + 1] = _combinations(vertex_count, face_dimension + 1)
     end
     return SimplicialComplex(levels)
+end
+
+"""Triangulate a rectangular surface, optionally identifying either axis."""
+function triangulated_grid_surface(
+    vertex_count_x::Int,
+    vertex_count_y::Int;
+    periodic_x::Bool = false,
+    periodic_y::Bool = false,
+    removed_cells = Set{Tuple{Int,Int}}(),
+)
+    vertex_count_x >= 3 || throw(ArgumentError("at least three x vertices are required"))
+    vertex_count_y >= 3 || throw(ArgumentError("at least three y vertices are required"))
+    cell_count_x = periodic_x ? vertex_count_x : vertex_count_x - 1
+    cell_count_y = periodic_y ? vertex_count_y : vertex_count_y - 1
+    vertex(x, y) = 1 + mod(x, vertex_count_x) + vertex_count_x * mod(y, vertex_count_y)
+    triangles = Tuple[]
+    for y in 0:(cell_count_y - 1), x in 0:(cell_count_x - 1)
+        (x + 1, y + 1) in removed_cells && continue
+        lower_left = vertex(x, y)
+        lower_right = vertex(x + 1, y)
+        upper_left = vertex(x, y + 1)
+        upper_right = vertex(x + 1, y + 1)
+        push!(triangles, (lower_left, lower_right, upper_right))
+        push!(triangles, (lower_left, upper_right, upper_left))
+    end
+    return complex_from_facets(triangles)
+end
+
+"""Form a simplicial connected sum of two closed triangulated surfaces."""
+function connected_sum_surfaces(
+    first::SimplicialComplex,
+    second::SimplicialComplex;
+    first_facet::Tuple = first.simplices[3][1],
+    second_facet::Tuple = second.simplices[3][1],
+)
+    length(first.simplices) == 3 == length(second.simplices) ||
+        throw(ArgumentError("connected sum requires two-dimensional complexes"))
+    first_facet in first.simplices[3] || throw(ArgumentError("first_facet is absent"))
+    second_facet in second.simplices[3] || throw(ArgumentError("second_facet is absent"))
+    maximum_first_vertex = maximum(only, first.simplices[1])
+    glued = Dict(second_facet[index] => first_facet[index] for index in 1:3)
+    next_vertex = maximum_first_vertex + 1
+    for vertex_tuple in second.simplices[1]
+        vertex = only(vertex_tuple)
+        if !haskey(glued, vertex)
+            glued[vertex] = next_vertex
+            next_vertex += 1
+        end
+    end
+    triangles = Tuple[facet for facet in first.simplices[3] if facet != first_facet]
+    for facet in second.simplices[3]
+        facet == second_facet && continue
+        mapped = Tuple(glued[vertex] for vertex in facet)
+        push!(triangles, mapped)
+    end
+    return complex_from_facets(triangles)
+end
+
+"""Freudenthal triangulation of a periodic cubic grid representing a 3-torus."""
+function triangulated_three_torus(period::Int)
+    period >= 3 || throw(ArgumentError("period must be at least three"))
+    vertex(x, y, z) =
+        1 + mod(x, period) + period * mod(y, period) + period^2 * mod(z, period)
+    axis_permutations = (
+        (1, 2, 3), (1, 3, 2), (2, 1, 3),
+        (2, 3, 1), (3, 1, 2), (3, 2, 1),
+    )
+    tetrahedra = Tuple[]
+    for z in 0:(period - 1), y in 0:(period - 1), x in 0:(period - 1)
+        for permutation in axis_permutations
+            coordinates = [x, y, z]
+            vertices = Int[vertex(coordinates...)]
+            for axis in permutation
+                coordinates[axis] += 1
+                push!(vertices, vertex(coordinates...))
+            end
+            push!(tetrahedra, Tuple(vertices))
+        end
+    end
+    return complex_from_facets(tetrahedra)
+end
+
+"""Qualify only codimension-one incidence, without claiming full manifoldness."""
+function codimension_one_status(complex::SimplicialComplex, dimension::Int)
+    dimension >= 1 || throw(ArgumentError("dimension must be positive"))
+    dimension + 1 <= length(complex.simplices) ||
+        throw(ArgumentError("complex has no simplices in the requested dimension"))
+    faces = Dict(face => 0 for face in complex.simplices[dimension])
+    for simplex in complex.simplices[dimension + 1]
+        for omitted in eachindex(simplex)
+            face = Tuple(simplex[index] for index in eachindex(simplex) if index != omitted)
+            faces[face] = get(faces, face, 0) + 1
+        end
+    end
+    incidences = collect(values(faces))
+    all(==(2), incidences) && return :closed_pseudomanifold
+    all(value -> value in (1, 2), incidences) && return :pseudomanifold_with_boundary
+    return :nonmanifold
 end
 
 function _combinations(number_of_vertices::Int, size_of_subset::Int)

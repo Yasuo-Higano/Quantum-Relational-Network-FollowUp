@@ -12,4 +12,9 @@ using QRNReplication
     include("analytic/support_decomposition_tests.jl")
     include("analytic/homology_tests.jl")
     include("adversarial/prime_flux_tests.jl")
+    include("adversarial/geometry_topology_tests.jl")
+    include("adversarial/generated_case_tests.jl")
+    include("adversarial/response_regime_tests.jl")
+    include("adversarial/hypergraph_regime_tests.jl")
+    include("adversarial/identifiability_regime_tests.jl")
 end

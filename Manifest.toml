@@ -2,7 +2,7 @@
 
 julia_version = "1.12.6"
 manifest_format = "2.0"
-project_hash = "bb05f6e3e49de2f41e7349f1fb268d3312f72ba5"
+project_hash = "77911c084f2496b932256a750084d8fb9b1ccae0"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -28,10 +28,19 @@ uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 version = "0.3.29+0"
 
 [[deps.QRNReplication]]
-deps = ["LinearAlgebra"]
+deps = ["LinearAlgebra", "Random", "SHA"]
 path = "."
 uuid = "0dd860a2-a3e5-47ec-ae15-861d0db8b7aa"
 version = "0.1.0"
+
+[[deps.Random]]
+deps = ["SHA"]
+uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+version = "1.11.0"
+
+[[deps.SHA]]
+uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]

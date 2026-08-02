@@ -13,11 +13,13 @@ include("Responses/LocalResponse.jl")
 include("Responses/ManyBodyResponse.jl")
 include("Factorization/OperationAlgebra.jl")
 include("Hypergraphs/SupportDecomposition.jl")
+include("Geometry/GraphGeometry.jl")
 include("Homology/SimplicialHomology.jl")
 include("Identifiability/DecisionRules.jl")
 include("Anomalies/AnomalyChecks.jl")
 include("LatticeFermions/FluxDiagnostics.jl")
 include("LatticeFermions/BWNormalization.jl")
+include("Generators/AdversarialCases.jl")
 
 using .CoreTypes
 using .FermionFock
@@ -25,11 +27,13 @@ using .LocalResponse
 using .ManyBodyResponse
 using .OperationAlgebra
 using .SupportDecomposition
+using .GraphGeometry
 using .SimplicialHomology
 using .DecisionRules
 using .AnomalyChecks
 using .FluxDiagnostics
 using .BWNormalization
+using .AdversarialCases
 
 export CoreTypes,
        FermionFock,
@@ -37,10 +41,12 @@ export CoreTypes,
        ManyBodyResponse,
        OperationAlgebra,
        SupportDecomposition,
+       GraphGeometry,
        SimplicialHomology,
        DecisionRules,
        AnomalyChecks,
        FluxDiagnostics,
-       BWNormalization
+       BWNormalization,
+       AdversarialCases
 
 end

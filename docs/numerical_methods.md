@@ -125,7 +125,8 @@ sign without using quarantined paper target numbers as tuning inputs.
 
 ## 8. Test and precision policy
 
-The Phase 3 suite contains 153 assertions. Exact domains use integers,
+The Phase 3 milestone contained 153 assertions; after Phase 4 adversarial
+expansion the suite contains 234 assertions. Exact domains use integers,
 rationals, or `F2` arithmetic. Floating comparisons use analytic-scale
 tolerances or observed convergence ratios rather than a project-wide constant.
 The suite is run with:

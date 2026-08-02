@@ -10,7 +10,8 @@ export double_commutator,
        projector_curvature_response,
        dense_population,
        spectral_population,
-       finite_difference_curvature
+       finite_difference_curvature,
+       response_noise_standard_error
 
 function _check_square(name::AbstractString, matrix::AbstractMatrix)
     size(matrix, 1) == size(matrix, 2) ||
@@ -209,6 +210,20 @@ function finite_difference_curvature(
     zero_time = dense_population(hamiltonian, covariance, projector, zero(time_step))
     minus = dense_population(hamiltonian, covariance, projector, -time_step)
     return (plus - 2 * zero_time + minus) / time_step^2
+end
+
+"""Propagate independent curvature standard errors through the signed response."""
+function response_noise_standard_error(
+    plus_standard_error::Real,
+    minus_standard_error::Real,
+    epsilon::Real,
+)
+    plus_standard_error >= 0 && isfinite(plus_standard_error) ||
+        throw(ArgumentError("plus standard error must be finite and nonnegative"))
+    minus_standard_error >= 0 && isfinite(minus_standard_error) ||
+        throw(ArgumentError("minus standard error must be finite and nonnegative"))
+    epsilon > 0 && isfinite(epsilon) || throw(ArgumentError("epsilon must be positive and finite"))
+    return hypot(plus_standard_error, minus_standard_error) / (4 * epsilon)
 end
 
 end

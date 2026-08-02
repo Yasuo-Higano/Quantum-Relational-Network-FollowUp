@@ -1,9 +1,9 @@
 # Clean-room replication plan
 
-Status: preregistered working plan; Phase 3 completed, 2026-08-02
+Status: preregistered working plan; Phase 4 completed, 2026-08-02
 Baseline commit inspected: `974a7c35ebaa855862ad98e535331ab2a520d15b`
 Language: Julia 1.12.6, official aarch64 Apple build
-Current phase: Phase 3 complete; Phase 4 has not started and no holdout has
+Current phase: Phase 4 complete; Phase 5 has not started and no holdout has
 been generated.
 
 ## 1. Objective and decision discipline
@@ -170,6 +170,30 @@ roundoff, and pairs of latent Hamiltonians with identical observations.
 
 Exit gate: every recovery family has positive, null, counterexample,
 non-identifiable, out-of-domain, and high-noise cells.
+
+Completion record, 2026-08-02:
+
+- A versioned SHA-derived generator now covers response, factorization,
+  hypergraph, topology, and cross-cutting identifiability families. Each family
+  contains positive, null, weak-signal, basis-change, boundary, inhomogeneous,
+  equivalent-model, missing-observation, out-of-domain, and high-noise cases.
+- Public train/validation seeds are deterministic. The holdout API refuses to
+  generate cells without both a post-freeze secret and an experiment ID; no
+  holdout cell or seed was generated during this phase.
+- Response adversaries cover open/periodic boundaries, disorder, probe-size
+  scaling, noise amplification, internal basis covariance, saturation,
+  non-Gaussian covariance insufficiency, and `H`/`-H` equivalence.
+- Hypergraph adversaries cover on-site, hopping, density-density, correlated
+  hopping, pair hopping, true/null three-body, four-body, local/nonlocal basis
+  changes, conditional projections, and sign/phase erasure by squared weights.
+- Geometry/homology adversaries include path, cycle, disk, cylinder, two-hole
+  disk, sphere, torus, genus-2, 3-ball, 3-sphere, 3-torus, Petersen, random
+  regular, complete, branched, and threshold-degenerate examples.
+- The full suite passes 234 of 234 assertions under Julia 1.12.6. The exact
+  generator contract is recorded in `docs/phase4_adversarial_design.md`.
+
+This completion establishes generator and adversarial coverage, not calibrated
+thresholds or holdout performance. Those remain gated by Phases 5--7.
 
 ### Phase 5 — Train and validation
 
