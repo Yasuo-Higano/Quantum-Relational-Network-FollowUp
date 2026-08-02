@@ -1,10 +1,10 @@
 # Clean-room replication plan
 
-Status: preregistered working plan; Phase 4 completed, 2026-08-02
+Status: preregistered working plan; Phase 5 completed, 2026-08-02
 Baseline commit inspected: `974a7c35ebaa855862ad98e535331ab2a520d15b`
 Language: Julia 1.12.6, official aarch64 Apple build
-Current phase: Phase 4 complete; Phase 5 has not started and no holdout has
-been generated.
+Current phase: Phase 5 complete; Phase 6 freeze has not started and no holdout
+has been generated.
 
 ## 1. Objective and decision discipline
 
@@ -209,6 +209,25 @@ Exit gate:
   by a newly committed validation ID;
 - thresholds, confidence levels, equivalence metrics, and abstention ordering
   are final.
+
+Completion record, 2026-08-02:
+
+- Scoring code, cell-local numeric tolerances, status precedence, validation
+  count, and primary targets were committed and pushed in `4f9fab6` before any
+  validation seed was derived.
+- Train `phase5-train-v1` evaluated 100 cells: selective risk `0`, answerable
+  recall `1`, impossibility recall `1`, and exact status accuracy `1`.
+- Validation `phase5-validation-v1` was evaluated once on 50 cells under source
+  commit `4f9fab6`: the same four metrics were all `0` or `1` at their ideal
+  values, and all preregistered targets passed.
+- Maximum numeric answer error in both splits was approximately `3.34e-16`,
+  below the preregistered weak-signal tolerance `2e-12`. No threshold, scorer,
+  generator, or algorithm was changed after observing validation.
+- Raw cell outputs and summaries are preserved under `experiments/train/` and
+  `experiments/validation/`; details are in `docs/phase5_train_validation.md`.
+
+These metrics describe the registered synthetic finite contracts. They do not
+resolve paper claims whose defining data or observation contract is missing.
 
 ### Phase 6 — Freeze
 

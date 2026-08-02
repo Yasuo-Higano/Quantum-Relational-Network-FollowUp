@@ -4,9 +4,8 @@ This repository is a Julia clean-room implementation for independently testing
 the supplied Quantum Relational Network paper claims. It does not port or
 consult the original implementation or its results.
 
-Current status: Phase 4 (independent generators and adversarial cases) is
-complete. Train/validation, freeze, fresh holdout, and the final replication
-verdict have not been run.
+Current status: Phase 5 (train and one-use validation) is complete. Freeze,
+fresh holdout, and the final replication verdict have not been run.
 
 ## Requirements
 
@@ -36,6 +35,7 @@ checks are documented in:
 - `docs/derivations.md`
 - `docs/numerical_methods.md`
 - `docs/phase4_adversarial_design.md`
+- `docs/phase5_train_validation.md`
 
 Do not generate a holdout before the Phase 6 freeze procedure in the
 replication plan. The future holdout runner must fail closed unless the freeze
