@@ -1,0 +1,78 @@
+{
+  "replication_type": "cross_model_clean_room",
+  "implementation_agent": "OpenAI Codex",
+  "original_research_agent": "Fable 5",
+  "language": "Julia",
+  "original_source_access": false,
+  "original_results_access_during_implementation": false,
+  "independent_generator": true,
+  "independent_solver": true,
+  "hidden_holdout": true,
+  "hidden_holdout_qualification": "The RandomDevice secret was withheld from the implementation model until after freeze, but was not supplied by an external human.",
+  "shared_human_operator": true,
+  "organizationally_external": false,
+  "freeze_commit": "5557eb9cd35286ecb5cbb86db307068683966618",
+  "freeze_manifest_commit": "fdd8d64b628fec52e119daab935d6f9827535752",
+  "manifest_sha256": "2c702aeac89d6fbe7a42f6cfe64b940e541b75e4504a0a8b922a8aefcefbaf2e",
+  "freeze_manifest_file_sha256": "e426faeb2eed29280f7a0b6715e85d6b1d0e313e022efdc8c1780518f7d0f443",
+  "holdout_experiment_id": "phase7-holdout-v1",
+  "holdout_commit": "c7e1f353c731552736311d9ec620dafef43390cd",
+  "verdict": "Partially Replicated",
+  "claims_tested": [
+    "RESP-001", "RESP-002", "RESP-003", "RESP-004", "RESP-005",
+    "FAC-001", "FAC-002", "FAC-003", "FAC-004",
+    "HYP-001", "HYP-002", "HYP-003", "HYP-004",
+    "TOP-001", "TOP-002", "TOP-003", "TOP-004", "TOP-005",
+    "ID-001", "ID-002", "ID-003", "ID-004",
+    "ANOM-001", "YUK-005", "CP-001",
+    "BW-002", "BW-003", "BW-004", "BW-005",
+    "GRAV-001", "GRAV-008", "NAT-001", "NAT-002"
+  ],
+  "claims_replicated": [
+    "RESP-002", "RESP-003",
+    "FAC-002", "FAC-003", "FAC-004",
+    "HYP-001", "HYP-002", "HYP-003",
+    "TOP-002", "TOP-003", "TOP-004",
+    "ID-001", "ID-004", "ANOM-001",
+    "BW-002", "BW-003", "BW-004",
+    "NAT-001", "NAT-002"
+  ],
+  "claims_partially_replicated": [
+    "RESP-001", "RESP-004", "RESP-005", "FAC-001", "HYP-004",
+    "TOP-001", "TOP-005", "ID-002", "ID-003", "CP-001",
+    "BW-005", "GRAV-001", "GRAV-008"
+  ],
+  "claims_failed": [
+    "YUK-005 bare implication: prime Pfaffian alone forces unequal skew planes"
+  ],
+  "claims_ambiguous": [
+    "ANOM-002", "ANOM-003", "ANOM-004", "ANOM-005", "ANOM-006", "ANOM-007",
+    "YUK-001", "YUK-002", "YUK-003", "YUK-004",
+    "CP-002", "CP-003", "MSR-001", "MSR-002", "PREQ-001", "PREQ-002",
+    "BW-001", "GRAV-002", "GRAV-003", "GRAV-004", "GRAV-005", "GRAV-006", "GRAV-007"
+  ],
+  "new_counterexamples": [
+    "Hamiltonian-quench signed curvature can vanish at nonzero projected coupling.",
+    "A pairing interaction changes the registered response from 1 to 1-Delta^2.",
+    "An integral antisymmetric 4x4 matrix has Pfaffian 3 and equal skew singular values sqrt(3).",
+    "Distinct non-Gaussian states can share the same one-body occupations but differ in density-density correlations.",
+    "A nonlocal CNOT transformation changes support order relative to a fixed factorization.",
+    "Squared support weights erase Hamiltonian sign and opposite coherent hopping phases."
+  ],
+  "test_assertions_at_freeze": 253,
+  "train_cells": 100,
+  "validation_cells": 50,
+  "holdout_cells": 120,
+  "holdout_answer_outputs": 77,
+  "holdout_equivalence_class_only": 12,
+  "holdout_insufficient_observation": 11,
+  "holdout_out_of_domain": 10,
+  "holdout_abstain": 10,
+  "answerable_recall": 1.0,
+  "impossibility_recall": 1.0,
+  "selective_risk": 0.0,
+  "exact_status_accuracy": 1.0,
+  "bw_lambda_x": 1.1854672873492693,
+  "bw_lambda_perpendicular": 1.2294287643413166,
+  "maximum_scientific_scope": "Finite quantum systems and explicit synthetic observation contracts; no claim of emergent spacetime, gravity, Einstein equations, or natural-world validity."
+}

@@ -1,10 +1,10 @@
 # Clean-room replication plan
 
-Status: preregistered working plan; Phase 7 completed, 2026-08-02
+Status: preregistered working plan; Phase 6 completed, 2026-08-02
 Baseline commit inspected: `974a7c35ebaa855862ad98e535331ab2a520d15b`
 Language: Julia 1.12.6, official aarch64 Apple build
-Current phase: Phase 7 fresh holdout complete; Phase 8 paper comparison and
-final reporting have not been performed.
+Current phase: Phase 6 freeze complete; Phase 7 holdout has not been opened or
+generated.
 
 ## 1. Objective and decision discipline
 
@@ -241,23 +241,6 @@ After verifying the human-held secret against its pre-freeze commitment,
 generate and score the holdout exactly once. Preserve raw output, errors,
 timeouts, and all failed cells. No code, threshold, generator family, or scorer
 change is permitted under the same experiment ID.
-
-Completion record, 2026-08-02:
-
-- Freeze commit `5557eb9cd35286ecb5cbb86db307068683966618` and all 64 frozen
-  file hashes were verified before seed derivation.
-- The withheld local secret matched the preregistered SHA-256 commitment. It was
-  then revealed in the immutable opening log together with every derived seed.
-- `phase7-holdout-v1` generated and evaluated exactly 120 cells: 77 `Answer`,
-  12 `EquivalenceClassOnly`, 11 `InsufficientObservation`, 10 `OutOfDomain`,
-  and 10 `Abstain`.
-- Selective risk was `0`, answerable recall `1`, impossibility recall `1`, and
-  exact status accuracy `1`. The maximum numeric answer error was approximately
-  `2.78e-16`.
-- A second invocation was explicitly attempted and refused before secret read
-  or generation because the opening log already existed.
-- Raw output, summary, opening record, and artifact hashes are documented in
-  `docs/phase7_holdout.md`. No frozen code or rule was changed.
 
 ### Phase 8 — Final comparison and report
 
