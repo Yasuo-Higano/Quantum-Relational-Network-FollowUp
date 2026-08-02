@@ -1,8 +1,8 @@
 # QRN clean-room replication final report
 
-Final verdict: **Partially Replicated**  
-Completion date: 2026-08-02  
-Freeze commit: `5557eb9cd35286ecb5cbb86db307068683966618`  
+Final verdict: **Partially Replicated**
+Completion date: 2026-08-02
+Freeze commit: `5557eb9cd35286ecb5cbb86db307068683966618`
 Fresh holdout: `phase7-holdout-v1`, opened once
 
 ## 1. Executive Summary
