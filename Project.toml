@@ -1,0 +1,16 @@
+name = "QRNReplication"
+uuid = "0dd860a2-a3e5-47ec-ae15-861d0db8b7aa"
+authors = ["OpenAI Codex"]
+version = "0.1.0"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[compat]
+julia = "1.12"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
