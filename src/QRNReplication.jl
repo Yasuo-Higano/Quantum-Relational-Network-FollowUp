@@ -21,7 +21,10 @@ include("LatticeFermions/FluxDiagnostics.jl")
 include("LatticeFermions/BWNormalization.jl")
 include("Generators/AdversarialCases.jl")
 include("Scoring/SelectiveScoring.jl")
+include("Reproducibility/CanonicalJSON.jl")
 include("Reproducibility/ExperimentIO.jl")
+include("Reproducibility/FreezeProtocol.jl")
+include("Reproducibility/HoldoutProtocol.jl")
 
 using .CoreTypes
 using .FermionFock
@@ -37,7 +40,10 @@ using .FluxDiagnostics
 using .BWNormalization
 using .AdversarialCases
 using .SelectiveScoring
+using .CanonicalJSON
 using .ExperimentIO
+using .FreezeProtocol
+using .HoldoutProtocol
 
 export CoreTypes,
        FermionFock,
@@ -53,6 +59,9 @@ export CoreTypes,
        BWNormalization,
        AdversarialCases,
        SelectiveScoring,
-       ExperimentIO
+       CanonicalJSON,
+       ExperimentIO,
+       FreezeProtocol,
+       HoldoutProtocol
 
 end

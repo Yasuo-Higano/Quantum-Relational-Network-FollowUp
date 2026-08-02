@@ -1,10 +1,10 @@
 # Clean-room replication plan
 
-Status: preregistered working plan; Phase 5 completed, 2026-08-02
+Status: preregistered working plan; Phase 6 completed, 2026-08-02
 Baseline commit inspected: `974a7c35ebaa855862ad98e535331ab2a520d15b`
 Language: Julia 1.12.6, official aarch64 Apple build
-Current phase: Phase 5 complete; Phase 6 freeze has not started and no holdout
-has been generated.
+Current phase: Phase 6 freeze complete; Phase 7 holdout has not been opened or
+generated.
 
 ## 1. Objective and decision discipline
 
@@ -528,6 +528,29 @@ validation.
 
 If a post-freeze bug is found, preserve the original failure. A fix requires a
 new experiment ID, new freeze commit, new secret commitment, and fresh holdout.
+
+Completion record, 2026-08-02:
+
+- All 253 assertions passed under the normal depot and a newly created empty
+  depot instantiated from `Project.toml` and `Manifest.toml`.
+- Julia, OS, CPU, memory, LLVM, BLAS, and thread facts are fixed in
+  `reports/environment.json`; scoring and threshold rules are fixed in
+  `reports/frozen_rules.toml`.
+- A 256-bit secret was generated through Julia `RandomDevice` into ignored,
+  mode-`0600` local storage. The implementation model was shown only the
+  SHA-256 commitment
+  `53527a3c56e9fcf1b4c1c2df2e6d7cffd6a34e6748b5b50aaa3a07796dcf57a1`
+  before freeze.
+- The dedicated freeze commit and canonical SHA-256 payload digest are recorded
+  in `reports/freeze_manifest.json` and its TOML verification companion. The
+  manifest excludes itself to avoid self-reference and hashes every declared
+  code, test, experiment, specification, environment, and frozen-rule target.
+- The Phase 7 runner refuses repeated opening, verifies every frozen file and
+  the secret commitment, and only then derives cell seeds. No holdout cell or
+  seed was generated in Phase 6.
+
+No implementation, generator, scorer, tolerance, or decision-rule change is
+permitted for experiment `phase7-holdout-v1` after this gate.
 
 ## 11. Reporting plan
 
