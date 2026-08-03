@@ -4,8 +4,19 @@ This repository is a Julia clean-room implementation for independently testing
 the supplied Quantum Relational Network paper claims. It does not port or
 consult the original implementation or its results.
 
-Current status: Phase 6 freeze is complete. The fresh holdout and final
-replication verdict have not been run.
+Current status: **Complete.** The frozen fresh holdout (`phase7-holdout-v1`,
+120 cells) was generated and opened exactly once on 2026-08-02 under the
+Phase 6 freeze (commit `5557eb9`), with all registered safety targets met
+(selective risk 0, answerable recall 1, impossibility recall 1; cell verdicts:
+77 Answer / 12 EquivalenceClassOnly / 11 InsufficientObservation /
+10 OutOfDomain / 10 Abstain). The final verdict on the supplied paper set is
+**Partially Replicated** — see `reports/final_report.md` (summary),
+`reports/machine_report.json` (machine-readable), and `docs/derivations.md`
+(independent derivations, including the exact integer counterexample to the
+bare prime-Pfaffian inference, YUK-005). This is a cross-model clean-room
+replication with a shared human operator; it is not an organizationally
+external replication. The holdout is consumed: the one-use runner must not be
+re-run against a new target without a new preregistered freeze.
 
 ## Requirements
 
@@ -26,7 +37,9 @@ The package-manager test entry point is equivalent:
 julia --project=. -e 'using Pkg; Pkg.test()'
 ```
 
-After inspecting the freeze record, the one-use holdout entry point is:
+After inspecting the freeze record, the one-use holdout entry point was
+(already consumed on 2026-08-02 — the runner fails closed on the existing
+output; kept for audit replay of the freeze verification only):
 
 ```bash
 julia --project=. experiments/verify_freeze.jl
