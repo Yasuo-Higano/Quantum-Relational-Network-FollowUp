@@ -4,6 +4,7 @@ This repository is a Julia clean-room implementation for independently testing
 the supplied Quantum Relational Network paper claims. It does not port or
 consult the original implementation or its results.
 
+<!-- STATUS:BEGIN (generated from FINAL_STATUS.json; edit that file and run tools/sync_status.jl) -->
 Current status: **Complete.** The frozen fresh holdout (`phase7-holdout-v1`,
 120 cells) was generated and opened exactly once on 2026-08-02 under the
 Phase 6 freeze (commit `5557eb9`), with all registered safety targets met
@@ -17,6 +18,7 @@ bare prime-Pfaffian inference, YUK-005). This is a cross-model clean-room
 replication with a shared human operator; it is not an organizationally
 external replication. The holdout is consumed: the one-use runner must not be
 re-run against a new target without a new preregistered freeze.
+<!-- STATUS:END -->
 
 ## Requirements
 

@@ -1,0 +1,14 @@
+# Governance CI: the status blocks in README.md / docs/replication_plan.md /
+# reports/final_report.md must be generated from FINAL_STATUS.json (the single
+# machine-readable source of truth). This job fails when any block drifts.
+name: status-check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: "1.12"
+      - run: julia tools/sync_status.jl --check

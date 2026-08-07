@@ -1,9 +1,11 @@
 # QRN clean-room replication final report
 
+<!-- STATUS:BEGIN (generated from FINAL_STATUS.json; edit that file and run tools/sync_status.jl) -->
 Final verdict: **Partially Replicated**
 Completion date: 2026-08-02
 Freeze commit: `5557eb9cd35286ecb5cbb86db307068683966618`
 Fresh holdout: `phase7-holdout-v1`, opened once
+<!-- STATUS:END -->
 
 ## 1. Executive Summary
 

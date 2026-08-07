@@ -1,10 +1,14 @@
 # Clean-room replication plan
 
-Status: preregistered working plan; Phase 6 completed, 2026-08-02
+<!-- STATUS:BEGIN (generated from FINAL_STATUS.json; edit that file and run tools/sync_status.jl) -->
+Status: all phases complete — Phase 7 holdout opened once (consumed) and the
+Phase 8 final report published on 2026-08-02; final verdict: **Partially Replicated**.
+This header is generated from `FINAL_STATUS.json`. The plan body below is the
+preregistered working plan and is preserved unmodified (its own phase-local
+wording reflects the time of preregistration).
+<!-- STATUS:END -->
 Baseline commit inspected: `974a7c35ebaa855862ad98e535331ab2a520d15b`
 Language: Julia 1.12.6, official aarch64 Apple build
-Current phase: Phase 6 freeze complete; Phase 7 holdout has not been opened or
-generated.
 
 ## 1. Objective and decision discipline
 
